@@ -3,13 +3,10 @@ function getComputerChoice() {
     switch (Math.round(Math.random()*(3-1)+1)){
         case 1:
             return a;
-            print(a);
         case 2:
             return b;
-            print(b);
         case 3:
             return c;
-            print(c);
     }
 }
 
