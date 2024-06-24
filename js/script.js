@@ -1,3 +1,15 @@
+const btn = document.querySelectorAll('button');
+const playerchoice = document.querySelector('.playerchoice');
+const computerchoice = document.querySelector('.compchoice');
+const pp = document.querySelector('.player');
+const cp = document.querySelector('.comp');
+const score = document.querySelector('#scores');
+let playerSelection='', computerSelection='';
+var p = 0, c = 0;
+
+
+const winstatement = document.createElement("p");
+
 function getComputerChoice() {
     let a = "Rock", b = "Paper", c = "Scissors"
     switch (Math.round(Math.random()*(3-1)+1)){
@@ -15,69 +27,66 @@ function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
     if (playerSelection == computerSelection) {
-        return "The game is a tie";
+        winstatement.textContent = "The game is a tie";
     }
     else if (playerSelection == "rock" && computerSelection == "paper"){
-        c = 1;
-        return "Computer wins!";
+        c += 1;
+        winstatement.textContent = "Computer wins!";
     }
     else if (playerSelection == "rock" && computerSelection == "scissors"){
-        p = 1;
-        return "Player wins!";
+        p += 1;
+        winstatement.textContent = "Player wins!";
     }
     else if (playerSelection == "paper" && computerSelection == "rock"){
-        p = 1;
-        return "Player wins!";
+        p += 1;
+        winstatement.textContent = "Player wins!";
     }
     else if (playerSelection == "paper" && computerSelection == "scissors"){
-        c = 1;
-        return "Computer wins!";
+        c += 1;
+        winstatement.textContent = "Computer wins!";
     }
     else if (playerSelection == "scissors" && computerSelection == "rock"){
-        c = 1;
-        return "Computer wins!";
+        c += 1;
+        winstatement.textContent = "Computer wins!";
     }
     else if (playerSelection == "scissors" && computerSelection == "paper"){
-        p = 1;
-        return "Player wins!";
+        p += 1;
+        winstatement.textContent = "Player wins!";
     }
     else {
         return console.error();
     }
+    cp.textContent = `Computer: ${c}`;
+    pp.textContent = `Player: ${p}`;
+    playerchoice.textContent = `Player Chooses: ${playerSelection}`;
+    computerchoice.textContent = `Computer Chooses: ${computerSelection}`;
+    score.appendChild(winstatement);
 }
 
-var p = 0, c = 0;
-function playGame(numberGames) {
-    let playerTAB = 0, compTAB = 0;
-    for (let x = 0; x < numberGames; x++) {
-        p = 0, c = 0;
-        const playerSelection = prompt("Rock, Paper or Scissors; Choose!: ");
-        const computerSelection = getComputerChoice();
-        console.log("player chooses: " + playerSelection);
-        console.log("computer chooses: " + computerSelection);
+btn.forEach((button) => {
+    button.addEventListener("click", () => {
+        console.log(`clicked ${button.textContent} button`);
+        playerSelection = button.textContent;
+        computerSelection = getComputerChoice();
         playRound(playerSelection, computerSelection);
-        if (p > c){
-            playerTAB += p;
+        console.log(p);
+        console.log(c);
+        if(p==5 && c<5){
+            alert(`Player Wins`);
+            p = 0;
+            c = 0;
         }
-        else {
-            compTAB += c;
+        else if(c==5 && p<5){
+            alert(`Computer Wins`);
+            p = 0;
+            c = 0;
         }
-    }
-    console.log(compTAB);
-    console.log(playerTAB);
-    let comRes = "Computer: " + compTAB;
-    let playRes = "Player: " + playerTAB;
-    console.log(comRes);
-    console.log(playRes);
-    if (playerTAB>compTAB){
-        alert("You win!");
-    }
-    else if (compTAB>playerTAB) {
-        alert("You fkn' loser!");
-    }
-    else {
-        alert("It's a tie, dammit!!!!")
-    }
-}
-
-playGame(5);
+        else if(c==5 && p==5){
+            alert(`It's a Tie`);
+            p = 0;
+            c = 0;
+        }
+    });        
+    console.log(playerSelection);
+    console.log(computerSelection);
+});
