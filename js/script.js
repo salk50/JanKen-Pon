@@ -27,7 +27,7 @@ function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
     if (playerSelection == computerSelection) {
-        winstatement.textContent = "The game is a tie";
+        winstatement.textContent = "The round is a tie";
     }
     else if (playerSelection == "rock" && computerSelection == "paper"){
         c += 1;
@@ -60,7 +60,8 @@ function playRound(playerSelection, computerSelection){
     pp.textContent = `Player: ${p}`;
     playerchoice.textContent = `Player Chooses: ${playerSelection}`;
     computerchoice.textContent = `Computer Chooses: ${computerSelection}`;
-    score.appendChild(winstatement);
+    winstatement.style.cssText = "display: flex; justify-content: center; color: white; font-size: 25px";
+    document.body.appendChild(winstatement);
 }
 
 btn.forEach((button) => {
