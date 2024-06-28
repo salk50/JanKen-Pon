@@ -7,6 +7,8 @@ const score = document.querySelector('#scores');
 let playerSelection='', computerSelection='';
 var p = 0, c = 0;
 
+const div1 = document.querySelector('#pc');
+const div2 = document.querySelector('#cc');
 
 const winstatement = document.createElement("p");
 
@@ -19,13 +21,15 @@ function getComputerChoice() {
             return b;
         case 3:
             return c;
-    }
-}
+    };
+};
 
 
 function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
+    playerchoice.textContent = `Player Chooses: ${playerSelection}`;
+    computerchoice.textContent = `Computer Chooses: ${computerSelection}`;
     if (playerSelection == computerSelection) {
         winstatement.textContent = "The round is a tie";
     }
@@ -56,10 +60,28 @@ function playRound(playerSelection, computerSelection){
     else {
         return console.error();
     }
+
+    if(playerSelection=="rock"){
+        div1.src = './img/Rock.png';
+    }
+    else if(playerSelection=="paper"){
+        div1.src = './img/Paper.png';
+    }
+    else if(playerSelection=="scissors"){
+        div1.src = './img/Scissors.png';
+    }
+
+    if(computerSelection=="rock"){
+        div2.src = './img/crock.png';
+    }
+    else if(computerSelection=="paper"){
+        div2.src = './img/cpaper.png';
+    }
+    else if(computerSelection=="scissors"){
+        div2.src = './img/cscissors.jpg';
+    }
     cp.textContent = `Computer: ${c}`;
     pp.textContent = `Player: ${p}`;
-    playerchoice.textContent = `Player Chooses: ${playerSelection}`;
-    computerchoice.textContent = `Computer Chooses: ${computerSelection}`;
     winstatement.style.cssText = "display: flex; justify-content: center; color: white; font-size: 25px";
     document.body.appendChild(winstatement);
 }
@@ -73,19 +95,19 @@ btn.forEach((button) => {
         console.log(p);
         console.log(c);
         if(p==5 && c<5){
-            alert(`Player Wins`);
             p = 0;
             c = 0;
+            alert(`Player Wins`);
         }
         else if(c==5 && p<5){
-            alert(`Computer Wins`);
             p = 0;
             c = 0;
+            alert(`Computer Wins`);
         }
         else if(c==5 && p==5){
-            alert(`It's a Tie`);
             p = 0;
             c = 0;
+            alert(`It's a Tie`);
         }
     });        
     console.log(playerSelection);
